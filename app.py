@@ -28,7 +28,7 @@ app.add_middleware(
 @app.post("/diagrams/generate-srs")
 async def generate_from_srs(srs: dict):
     """
-    Generate diagrams from SRS JSON using Claude AI.
+    Generate diagrams from SRS JSON using Gemini AI.
     
     This is the main Agent 2 endpoint that receives SRS output from Agent 1.
     
@@ -42,17 +42,64 @@ async def generate_from_srs(srs: dict):
     """
     try:
         diagrams = await run_srs_to_diagrams(srs)
-        return {
+        response_data = {
             "status": "success",
             "agent": "Agent-2-DiagramGenerator",
             "system_name": srs.get("system_name", "Unknown"),
             "diagrams_generated": diagrams.get("diagram_count", 0),
             "data": diagrams
         }
+        
+        # Save to latest_diagrams.json for persistence and dynamic frontend viewing
+        try:
+            with open("latest_diagrams.json", "w", encoding="utf-8") as f:
+                json.dump(response_data, f, indent=2, ensure_ascii=False)
+        except Exception:
+            pass
+            
+        return response_data
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"Invalid SRS format: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Diagram generation failed: {str(e)}")
+
+
+@app.get("/diagrams/latest")
+async def get_latest_diagrams():
+    """
+    Get the latest generated diagrams from the most recent run.
+    """
+    try:
+        # Check for the latest run
+        if os.path.exists("latest_diagrams.json"):
+            with open("latest_diagrams.json", "r", encoding="utf-8") as f:
+                return json.load(f)
+        
+        # Fall back to default template diagrams.json if it exists
+        elif os.path.exists("diagrams.json"):
+            with open("diagrams.json", "r", encoding="utf-8") as f:
+                default_diagrams = json.load(f).get("diagrams", [])
+                
+                # Transform to match the schema expected by the frontend
+                for diagram in default_diagrams:
+                    if "mermaid" in diagram and "image_url" not in diagram:
+                        import base64
+                        encoded = base64.b64encode(diagram["mermaid"].encode()).decode()
+                        diagram["image_url"] = f"https://mermaid.ink/img/{encoded}"
+                        
+                return {
+                    "status": "success",
+                    "agent": "Agent-2-DiagramGenerator",
+                    "system_name": "College Event Management Website",
+                    "diagrams_generated": len(default_diagrams),
+                    "data": {
+                        "generated_diagrams": default_diagrams
+                    }
+                }
+        else:
+            raise HTTPException(status_code=404, detail="No diagrams found. Please run the generation endpoint first.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/health")
@@ -62,6 +109,7 @@ async def health_check():
         "status": "healthy",
         "agent": "Agent-2-DiagramGenerator",
         "endpoints": [
-            "/diagrams/generate-srs (POST)"
+            "/diagrams/generate-srs (POST)",
+            "/diagrams/latest (GET)"
         ]
     }

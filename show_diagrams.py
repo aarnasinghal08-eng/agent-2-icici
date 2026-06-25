@@ -19,24 +19,50 @@ def mermaid_to_image_url(mermaid_code: str) -> str:
     encoded = base64.b64encode(mermaid_code.encode('utf-8')).decode('utf-8')
     return f"https://mermaid.ink/img/{encoded}"
 
-# Load the diagrams JSON
-diagrams_file = Path(__file__).parent / "diagrams.json"
+# Try to find the diagrams JSON file dynamically
+current_dir = Path(__file__).parent
+diagrams_file = None
+
+# 1. Check for latest_diagrams.json
+if (current_dir / "latest_diagrams.json").exists():
+    diagrams_file = current_dir / "latest_diagrams.json"
+else:
+    # 2. Check for any *_output.json files
+    output_files = list(current_dir.glob("*_output.json"))
+    if output_files:
+        # Sort by modification time (newest first)
+        output_files.sort(key=lambda x: x.stat().st_mtime, reverse=True)
+        diagrams_file = output_files[0]
+    else:
+        # 3. Fallback to default diagrams.json
+        diagrams_file = current_dir / "diagrams.json"
 
 try:
+    print(f"📂 Loading diagrams from: {diagrams_file.name}")
     with open(diagrams_file, 'r', encoding='utf-8') as f:
         diagrams_data = json.load(f)
 except FileNotFoundError:
-    print(f"❌ Error: {diagrams_file} not found.")
+    print(f"❌ Error: No diagrams file found.")
     sys.exit(1)
 except json.JSONDecodeError as e:
     print(f"❌ Error decoding JSON from {diagrams_file}: {e}")
     sys.exit(1)
 
+# Extract diagrams based on the schema format
+if "data" in diagrams_data and "generated_diagrams" in diagrams_data["data"]:
+    diagrams = diagrams_data["data"]["generated_diagrams"]
+    system_name = diagrams_data.get("system_name", "Integrated Diagrams")
+elif "diagrams" in diagrams_data:
+    diagrams = diagrams_data["diagrams"]
+    system_name = "College Event Management Website"
+else:
+    diagrams = []
+    system_name = "Unknown System"
+
 print("\n" + "=" * 80)
-print("✅ INTEGRATED MERMAID DIAGRAMS - COLLEGE EVENT MANAGEMENT SYSTEM")
+print(f"✅ INTEGRATED MERMAID DIAGRAMS - {system_name.upper()}")
 print("=" * 80)
 
-diagrams = diagrams_data.get("diagrams", [])
 
 for i, diagram in enumerate(diagrams, 1):
     title = diagram.get("title", "Untitled Diagram")

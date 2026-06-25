@@ -53,9 +53,15 @@ def generate_diagrams_from_srs(srs_data):
     # Create prompt for Gemini to generate diagrams
     srs_json = json.dumps(srs_data, indent=2)
     
+    # Dynamically extract actors and system name to make the prompt generic
+    system_name = srs_data.get("system_name", "the system")
+    actors = srs_data.get("actors", [])
+    primary_actor = actors[0].get("name", "Primary Actor") if len(actors) > 0 else "Primary Actor"
+    secondary_actor = actors[1].get("name", "Secondary Actor") if len(actors) > 1 else "Secondary Actor"
+    
     prompt = f"""You are a Diagram Generation Expert specializing in UML and Mermaid visualization.
 
-Given this SRS JSON, generate 6 production-grade Mermaid diagrams in valid JSON format.
+Given this SRS JSON for the system '{system_name}', generate exactly 6 production-grade Mermaid diagrams in valid JSON format.
 
 SRS INPUT:
 {srs_json}
@@ -73,17 +79,17 @@ TASK: Generate exactly 6 diagrams matching this schema:
 }}
 
 DIAGRAMS TO GENERATE:
-1. Use Case Diagram - All actors and use cases with relationships
-2. Primary Actor Journey - Main workflow sequence (Student path)
-3. Secondary Workflow - Alternative processes (Organizer path)
-4. Payment & Integration Flow - External systems sequence
-5. State Machine - Student registration state transitions
-6. Requirements Traceability - FR to UC mapping
+1. Use Case Diagram - All actors and use cases with relationships for {system_name}
+2. Primary Actor Journey - Main workflow sequence for {primary_actor}
+3. Secondary Workflow - Alternative processes or workflow sequence for {secondary_actor}
+4. System Integration & Flow - Flow involving external systems, APIs, or database integrations
+5. State Machine - Key entity or process state transitions in the system
+6. Requirements Traceability - Functional requirements (FR) mapped to use cases (UC)
 
 CRITICAL RULES:
 ✓ Generate VALID Mermaid syntax
 ✓ Use "\\n" for newlines in JSON strings (NOT actual newlines)
-✓ Preserve all IDs (A1, UC1, FR-1) in diagram labels
+✓ Preserve all IDs (e.g., A1, UC1, FR-1) in diagram labels
 ✓ Use flowchart for workflows, stateDiagram-v2 for states
 ✓ Return ONLY valid JSON, no markdown, no code fences
 ✓ Each diagram type MUST match the schema exactly
