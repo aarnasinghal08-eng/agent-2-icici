@@ -2,3 +2,10 @@ venv/
 .venv/
 __pycache__/
 .env
+
+# Local test outputs
+*_output.json
+
+# Developer Kit cache
+.adk/
+**/.adk/
