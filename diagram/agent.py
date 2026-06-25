@@ -137,7 +137,7 @@ Return valid JSON only."""
 async def run_srs_to_diagrams(srs_json):
     """
     Async wrapper to generate diagrams from SRS JSON.
-    Uses Claude AI for dynamic diagram generation.
+    Uses Gemini AI for dynamic diagram generation.
     """
     diagrams = generate_diagrams_from_srs(srs_json)
     response = add_image_urls_to_response(diagrams)

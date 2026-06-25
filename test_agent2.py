@@ -58,7 +58,7 @@ def generate_diagrams(srs_data):
         response = requests.post(
             API_URL,
             json=srs_data,
-            timeout=60  # Allow up to 60 seconds for Claude API
+            timeout=60  # Allow up to 60 seconds for Gemini API
         )
         
         if response.status_code == 200:
@@ -70,7 +70,7 @@ def generate_diagrams(srs_data):
             print(f"   Response: {response.text}")
             return None
     except requests.exceptions.Timeout:
-        print("❌ Request timed out. Claude API is taking too long.")
+        print("❌ Request timed out. Gemini API is taking too long.")
         return None
     except requests.exceptions.ConnectionError:
         print("❌ Cannot connect to Agent 2")

@@ -7,8 +7,8 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 pydantic = "*"
+google-genai = "*"
 python-dotenv = "*"
-anthropic = "*"
 
 [dev-packages]
 

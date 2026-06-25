@@ -10,6 +10,12 @@ import time
 import json
 import os
 from pathlib import Path
+# Configure standard output to use UTF-8 on Windows if supported to avoid UnicodeEncodeError
+if sys.platform.startswith('win'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except AttributeError:
+        pass
 
 def print_header(text):
     """Print section header"""
@@ -186,7 +192,7 @@ def test_api():
     
     except requests.exceptions.Timeout:
         print("  ❌ Request timed out\n")
-        print("  Claude API took too long to respond")
+        print("  Gemini API took too long to respond")
         print("  This is normal for the first request\n")
         return False
     except Exception as e:
