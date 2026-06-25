@@ -1,0 +1,107 @@
+{
+  "system_name": "College Event Management Website",
+  "actors": [
+    {
+      "id": "A1",
+      "name": "Student",
+      "description": "A college student who wants to view, register for, and manage their event registrations."
+    },
+    {
+      "id": "A2",
+      "name": "Organizer",
+      "description": "A college staff member or event coordinator responsible for creating, managing, and monitoring events."
+    }
+  ],
+  "use_cases": [
+    {
+      "id": "UC1",
+      "name": "View Events",
+      "actors": ["A1"],
+      "trigger": "Student accesses the website.",
+      "outcome": "Student views a list of upcoming events.",
+      "functional_requirements": ["FR-1"]
+    },
+    {
+      "id": "UC2",
+      "name": "Register for Event",
+      "actors": ["A1"],
+      "trigger": "Student selects an event to register.",
+      "outcome": "Student successfully registers for the event and receives a confirmation email.",
+      "functional_requirements": ["FR-2", "FR-3", "FR-12", "FR-16"]
+    },
+    {
+      "id": "UC3",
+      "name": "Sign Up",
+      "actors": ["A1"],
+      "trigger": "Student chooses to create a new account.",
+      "outcome": "Student account is created using their college email address.",
+      "functional_requirements": ["FR-4"]
+    },
+    {
+      "id": "UC4",
+      "name": "Log In",
+      "actors": ["A1", "A2"],
+      "trigger": "User attempts to access personalized or admin features.",
+      "outcome": "User is authenticated and gains access to their respective dashboard/features.",
+      "functional_requirements": ["FR-5"]
+    },
+    {
+      "id": "UC5",
+      "name": "View Registrations",
+      "actors": ["A1"],
+      "trigger": "Logged-in student navigates to their registrations section.",
+      "outcome": "Student views a list of events they have registered for.",
+      "functional_requirements": ["FR-6"]
+    },
+    {
+      "id": "UC6",
+      "name": "Manage Events",
+      "actors": ["A2"],
+      "trigger": "Organizer accesses the admin dashboard's event management section.",
+      "outcome": "Organizer successfully creates, edits, or deletes an event.",
+      "functional_requirements": ["FR-7", "FR-8", "FR-9", "FR-10"]
+    },
+    {
+      "id": "UC7",
+      "name": "View Registration Statistics",
+      "actors": ["A2"],
+      "trigger": "Organizer accesses the admin dashboard's statistics section.",
+      "outcome": "Organizer views registration analytics and statistics for events.",
+      "functional_requirements": ["FR-7", "FR-11"]
+    },
+    {
+      "id": "UC8",
+      "name": "Process Payment",
+      "actors": ["A1"],
+      "trigger": "Student proceeds to pay for a paid event during registration.",
+      "outcome": "Payment is successfully processed, and a downloadable PDF ticket with a QR code is generated.",
+      "functional_requirements": ["FR-13", "FR-14"]
+    },
+    {
+      "id": "UC9",
+      "name": "Export Participant Data",
+      "actors": ["A2"],
+      "trigger": "Organizer selects an event and chooses to export participant data.",
+      "outcome": "Organizer downloads participant data in CSV format.",
+      "functional_requirements": ["FR-7", "FR-15"]
+    }
+  ],
+  "functional_requirements": [
+    {"id": "FR-1", "text": "The system shall allow students to view upcoming events."},
+    {"id": "FR-2", "text": "The system shall allow students to register for events."},
+    {"id": "FR-3", "text": "The system shall send an email confirmation to students after successful registration."},
+    {"id": "FR-4", "text": "The system shall allow students to sign up using their college email address."},
+    {"id": "FR-5", "text": "The system shall allow students and organizers to log in using their credentials."},
+    {"id": "FR-6", "text": "The system shall allow students to view their past and upcoming event registrations."},
+    {"id": "FR-7", "text": "The system shall provide an admin dashboard for organizers."},
+    {"id": "FR-8", "text": "The system shall allow organizers to create events."},
+    {"id": "FR-9", "text": "The system shall allow organizers to edit existing events."},
+    {"id": "FR-10", "text": "The system shall allow organizers to delete events."},
+    {"id": "FR-11", "text": "The system shall display registration statistics to organizers."},
+    {"id": "FR-12", "text": "The system shall collect Name, Email, Department, Year of Study, and Phone Number during student registration."},
+    {"id": "FR-13", "text": "The system shall integrate with a payment gateway (e.g., Razorpay) for paid events."},
+    {"id": "FR-14", "text": "The system shall generate a downloadable PDF ticket with a QR code for students after payment."},
+    {"id": "FR-15", "text": "The system shall allow organizers to export participant data in CSV format."},
+    {"id": "FR-16", "text": "The system shall send reminder emails to students 24 hours before an event."}
+  ]
+}

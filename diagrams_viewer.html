@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Management System - Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .diagrams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .diagram-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        .diagram-card h2 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+        .diagram-card .diagram-type {
+            color: #999;
+            font-size: 0.85em;
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #eee;
+            min-height: 400px;
+        }
+        footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 College Event Management System</h1>
+            <p>Integrated Mermaid Diagrams - 4 Comprehensive Views</p>
+        </header>
+
+        <div class="diagrams-grid">
+            <!-- Diagram 1: Complete Use Case -->
+            <div class="diagram-card">
+                <h2>1️⃣ Complete Use Case Diagram</h2>
+                <div class="diagram-type">9 Use Cases | 2 Actors | All Relationships</div>
+                <div class="mermaid">
+graph TB
+    A1["👤 A1: Student"]
+    A2["👤 A2: Organizer"]
+    
+    UC1["UC1: View Events"]
+    UC2["UC2: Register<br/>for Event"]
+    UC3["UC3: Sign Up"]
+    UC4["UC4: Log In"]
+    UC5["UC5: View<br/>Registrations"]
+    UC6["UC6: Manage<br/>Events"]
+    UC7["UC7: View Statistics"]
+    UC8["UC8: Process<br/>Payment"]
+    UC9["UC9: Export<br/>Data"]
+    
+    A1 --> UC1
+    A1 --> UC2
+    A1 --> UC3
+    A1 --> UC4
+    A1 --> UC5
+    A1 --> UC8
+    
+    A2 --> UC4
+    A2 --> UC6
+    A2 --> UC7
+    A2 --> UC9
+    
+    UC2 --> UC8
+    UC6 --> UC4
+    UC7 --> UC4
+    UC9 --> UC4
+                </div>
+            </div>
+
+            <!-- Diagram 2: Student Journey -->
+            <div class="diagram-card">
+                <h2>2️⃣ Student Journey</h2>
+                <div class="diagram-type">Sign Up → Browse → Register → Pay → Ticket</div>
+                <div class="mermaid">
+flowchart TD
+    Start(["Student Visits Website"]) --> SignupCheck{"Has Account?"}
+    SignupCheck -->|No| SignUp["UC3: Sign Up<br/>FR-4: Use College Email"]
+    SignUp --> LogIn["UC4: Log In<br/>FR-5: Authenticate"]
+    SignupCheck -->|Yes| LogIn
+    LogIn --> ViewEvents["UC1: View Events<br/>FR-1: Browse Upcoming Events"]
+    ViewEvents --> SelectEvent{"Event Found?"}
+    SelectEvent -->|No| ViewEvents
+    SelectEvent -->|Yes| Register["UC2: Register for Event<br/>FR-2, FR-12: Collect Name, Email, etc."]
+    Register --> PaidEvent{"Paid Event?"}
+    PaidEvent -->|No| ConfirmEmail["FR-3: Send Confirmation<br/>Email to Student"]
+    PaidEvent -->|Yes| Payment["UC8: Process Payment<br/>FR-13: Razorpay Integration"]
+    Payment --> PaymentCheck{"Payment<br/>Successful?"}
+    PaymentCheck -->|No| PaymentFailed["Payment Failed"]
+    PaymentFailed --> Register
+    PaymentCheck -->|Yes| Ticket["FR-14: Generate PDF<br/>Ticket with QR Code"]
+    Ticket --> ConfirmEmail
+    ConfirmEmail --> ViewReg["UC5: View Registrations<br/>FR-6: See Past/Upcoming Events"]
+    ViewReg --> End(["Registration Complete"])
+                </div>
+            </div>
+
+            <!-- Diagram 3: Organizer Workflow -->
+            <div class="diagram-card">
+                <h2>3️⃣ Organizer Workflow</h2>
+                <div class="diagram-type">Create/Manage Events → Monitor → Export Data</div>
+                <div class="mermaid">
+flowchart TD
+    Start(["Organizer Logs In"]) --> Auth["UC4: Log In<br/>FR-5: Authenticate"]
+    Auth --> Dashboard["FR-7: Admin Dashboard"]
+    Dashboard --> Action{"Select Action"}
+    
+    Action -->|Manage| Create["UC6: Manage Events"]
+    Create --> CreateSub{"Operation"}
+    CreateSub -->|Create| CreateE["FR-8: Create<br/>New Event"]
+    CreateSub -->|Edit| EditE["FR-9: Edit<br/>Existing Event"]
+    CreateSub -->|Delete| DeleteE["FR-10: Delete<br/>Event"]
+    CreateE --> Dashboard
+    EditE --> Dashboard
+    DeleteE --> Dashboard
+    
+    Action -->|Monitor| Stats["UC7: View Stats<br/>FR-11: Display Registration<br/>Analytics"]
+    Stats --> Dashboard
+    
+    Action -->|Export| Export["UC9: Export Data<br/>FR-15: CSV Format"]
+    Export --> Download["Participant List<br/>Downloaded"]
+    Download --> Dashboard
+                </div>
+            </div>
+
+            <!-- Diagram 4: Payment Processing Sequence -->
+            <div class="diagram-card">
+                <h2>4️⃣ Payment Processing Sequence</h2>
+                <div class="diagram-type">FR-13 & FR-14 Integration Flow</div>
+                <div class="mermaid">
+flowchart LR
+    Student["Student"] -->|Initiates Payment| Register["Registration<br/>System"]
+    Register -->|FR-13: Integration| RazorPay["Razorpay<br/>Gateway"]
+    RazorPay -->|Process Payment| Bank["Bank"]
+    Bank -->|Success/Fail| RazorPay
+    RazorPay -->|Status| Register
+    Register -->|Payment Success| Ticket["UC8: Process Payment<br/>Generate Ticket"]
+    Ticket -->|FR-14: Generate PDF<br/>with QR Code| PDF["PDF Ticket"]
+    PDF -->|Deliver| Student
+    Register -->|Payment Fail| Retry["Retry Payment"]
+    Retry -->|Re-initiate| Register
+                </div>
+            </div>
+
+            <!-- Diagram 5: System State Machine -->
+            <div class="diagram-card">
+                <h2>5️⃣ System State Machine</h2>
+                <div class="diagram-type">Student Registration State Transitions</div>
+                <div class="mermaid">
+stateDiagram-v2
+    [*] --> NotAuthenticated: Start
+    
+    NotAuthenticated --> AccountCreated: UC3: Sign Up
+    AccountCreated --> Authenticated: UC4: Log In
+    NotAuthenticated --> Authenticated: UC4: Log In
+    
+    Authenticated --> BrowsingEvents: UC1: View Events
+    BrowsingEvents --> BrowsingEvents: Browse Multiple Events
+    BrowsingEvents --> EventSelected: Select Event
+    Authenticated --> ViewMyReg: UC5: View Registrations
+    ViewMyReg --> BrowsingEvents
+    
+    EventSelected --> RegistrationForm: UC2: Register for Event
+    RegistrationForm --> DataCollection: FR-12: Collect Info
+    DataCollection --> CheckPayment: Is Paid Event?
+    
+    CheckPayment --> FreeEvent: No Payment Required
+    FreeEvent --> SendConfirm: FR-3: Send Confirmation
+    
+    CheckPayment --> ProcessPayment: UC8: Process Payment
+    ProcessPayment --> PaymentPending: FR-13: Razorpay Integration
+    PaymentPending --> PaymentSuccess: Payment Approved
+    PaymentPending --> PaymentFailed: Payment Rejected
+    PaymentFailed --> ProcessPayment: Retry Payment
+    
+    PaymentSuccess --> GenerateTicket: FR-14: Generate PDF<br/>with QR Code
+    GenerateTicket --> SendConfirm
+    SendConfirm --> Registered: Registration Complete
+    Registered --> [*]: End
+                </div>
+            </div>
+
+            <!-- Diagram 6: FR Coverage Map -->
+            <div class="diagram-card">
+                <h2>6️⃣ Functional Requirements Coverage</h2>
+                <div class="diagram-type">All 16 FRs Mapped to 9 UCs</div>
+                <div class="mermaid">
+flowchart TB
+    FR1["FR-1: View Events"] --> UC1["UC1"]
+    FR2["FR-2: Register"] --> UC2["UC2"]
+    FR3["FR-3: Confirmation<br/>Email"] --> UC2
+    FR4["FR-4: Sign Up<br/>College Email"] --> UC3["UC3"]
+    FR5["FR-5: Log In"] --> UC4["UC4"]
+    FR6["FR-6: View<br/>Registrations"] --> UC5["UC5"]
+    FR7["FR-7: Admin<br/>Dashboard"] --> UC6["UC6"]
+    FR8["FR-8: Create<br/>Events"] --> UC6
+    FR9["FR-9: Edit<br/>Events"] --> UC6
+    FR10["FR-10: Delete<br/>Events"] --> UC6
+    FR11["FR-11: Statistics"] --> UC7["UC7"]
+    FR12["FR-12: Collect<br/>Data"] --> UC2
+    FR13["FR-13: Payment<br/>Gateway"] --> UC8["UC8"]
+    FR14["FR-14: Generate<br/>Ticket"] --> UC8
+    FR15["FR-15: Export<br/>CSV"] --> UC9["UC9"]
+    FR16["FR-16: Email<br/>Reminders"] --> UC2
+    
+    UC1 --> System["College Event<br/>Management System"]
+    UC2 --> System
+    UC3 --> System
+    UC4 --> System
+    UC5 --> System
+    UC6 --> System
+    UC7 --> System
+    UC8 --> System
+    UC9 --> System
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✅ All diagrams generated from College Event Management Website SRS</p>
+            <p>16 Functional Requirements | 9 Use Cases | 2 Actors | 6 Comprehensive Diagrams</p>
+            <p>Generated on 2026-06-22 | Mermaid.js Visualization</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>

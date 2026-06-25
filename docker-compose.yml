@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  diagram-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agent2-diagram-generator
+    ports:
+      - "8000:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - FASTAPI_HOST=0.0.0.0
+      - FASTAPI_PORT=8000
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./srs.json:/app/srs.json:ro
+      - ./diagrams.json:/app/diagrams.json:ro
+      - ./diagrams_viewer.html:/app/diagrams_viewer.html:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - diagram-network
+    labels:
+      com.example.description: "Agent 2: SRS to Mermaid Diagrams"
+      com.example.version: "1.0.0"
+
+networks:
+  diagram-network:
+    driver: bridge

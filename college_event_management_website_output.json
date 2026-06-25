@@ -1,0 +1,255 @@
+{
+  "status": "success",
+  "agent": "Agent-2-DiagramGenerator",
+  "system_name": "College Event Management Website",
+  "diagrams_generated": 6,
+  "data": {
+    "status": "success",
+    "generated_diagrams": [
+      {
+        "id": "diagram-1",
+        "title": "Use Case Diagram - All Actors and Use Cases",
+        "type": "flowchart",
+        "mermaid": "graph TD\n    actor A1 as \"A1: Student\"\n    actor A2 as \"A2: Organizer\"\n    \n    subgraph \"College Event Management Website\"\n        UC1(UC1: View Events)\n        UC2(UC2: Register for Event)\n        UC3(UC3: Sign Up)\n        UC4(UC4: Log In)\n        UC5(UC5: View Registrations)\n        UC6(UC6: Manage Events)\n        UC7(UC7: View Registration Statistics)\n        UC8(UC8: Process Payment)\n        UC9(UC9: Export Participant Data)\n    end\n\n    A1 --> UC1\n    A1 --> UC2\n    A1 --> UC3\n    A1 --> UC4\n    A1 --> UC5\n    A1 --> UC8\n\n    A2 --> UC4\n    A2 --> UC6\n    A2 --> UC7\n    A2 --> UC9",
+        "image_url": "https://mermaid.ink/img/Z3JhcGggVEQKICAgIGFjdG9yIEExIGFzICJBMTogU3R1ZGVudCIKICAgIGFjdG9yIEEyIGFzICJBMjogT3JnYW5pemVyIgogICAgCiAgICBzdWJncmFwaCAiQ29sbGVnZSBFdmVudCBNYW5hZ2VtZW50IFdlYnNpdGUiCiAgICAgICAgVUMxKFVDMTogVmlldyBFdmVudHMpCiAgICAgICAgVUMyKFVDMjogUmVnaXN0ZXIgZm9yIEV2ZW50KQogICAgICAgIFVDMyhVQzM6IFNpZ24gVXApCiAgICAgICAgVUM0KFVDNDogTG9nIEluKQogICAgICAgIFVDNShVQzU6IFZpZXcgUmVnaXN0cmF0aW9ucykKICAgICAgICBVQzYoVUM2OiBNYW5hZ2UgRXZlbnRzKQogICAgICAgIFVDNyhVQzc6IFZpZXcgUmVnaXN0cmF0aW9uIFN0YXRpc3RpY3MpCiAgICAgICAgVUM4KFVDODogUHJvY2VzcyBQYXltZW50KQogICAgICAgIFVDOShVQzk6IEV4cG9ydCBQYXJ0aWNpcGFudCBEYXRhKQogICAgZW5kCgogICAgQTEgLS0+IFVDMQogICAgQTEgLS0+IFVDMgogICAgQTEgLS0+IFVDMwogICAgQTEgLS0+IFVDNAogICAgQTEgLS0+IFVDNQogICAgQTEgLS0+IFVDOAoKICAgIEEyIC0tPiBVQzQKICAgIEEyIC0tPiBVQzYKICAgIEEyIC0tPiBVQzcKICAgIEEyIC0tPiBVQzk="
+      },
+      {
+        "id": "diagram-2",
+        "title": "Primary Actor Journey - Student Workflow",
+        "type": "flowchart",
+        "mermaid": "graph TD\n    subgraph \"Student Event Journey\"\n        Start[Start: Student Accesses Website]\n        Start --> UC3(UC3: Sign Up)\n        UC3 --> UC4(UC4: Log In)\n        UC4 --> UC1(UC1: View Events)\n        UC1 --> SelectEvent{Select an Event?}\n        SelectEvent --> UC2(UC2: Register for Event)\n        UC2 -- \"Requires Payment\" --> IsPaid{Is Paid Event?}\n        IsPaid -- \"Yes\" --> UC8(UC8: Process Payment)\n        UC8 --> Confirmation[Registration Confirmed (FR-3, FR-14)]\n        IsPaid -- \"No\" --> Confirmation\n        Confirmation --> End[End: Enjoy Event!]\n        \n        UC4 --> UC5(UC5: View Registrations)\n        UC5 --> End\n    end",
+        "image_url": "https://mermaid.ink/img/Z3JhcGggVEQKICAgIHN1YmdyYXBoICJTdHVkZW50IEV2ZW50IEpvdXJuZXkiCiAgICAgICAgU3RhcnRbU3RhcnQ6IFN0dWRlbnQgQWNjZXNzZXMgV2Vic2l0ZV0KICAgICAgICBTdGFydCAtLT4gVUMzKFVDMzogU2lnbiBVcCkKICAgICAgICBVQzMgLS0+IFVDNChVQzQ6IExvZyBJbikKICAgICAgICBVQzQgLS0+IFVDMShVQzE6IFZpZXcgRXZlbnRzKQogICAgICAgIFVDMSAtLT4gU2VsZWN0RXZlbnR7U2VsZWN0IGFuIEV2ZW50P30KICAgICAgICBTZWxlY3RFdmVudCAtLT4gVUMyKFVDMjogUmVnaXN0ZXIgZm9yIEV2ZW50KQogICAgICAgIFVDMiAtLSAiUmVxdWlyZXMgUGF5bWVudCIgLS0+IElzUGFpZHtJcyBQYWlkIEV2ZW50P30KICAgICAgICBJc1BhaWQgLS0gIlllcyIgLS0+IFVDOChVQzg6IFByb2Nlc3MgUGF5bWVudCkKICAgICAgICBVQzggLS0+IENvbmZpcm1hdGlvbltSZWdpc3RyYXRpb24gQ29uZmlybWVkIChGUi0zLCBGUi0xNCldCiAgICAgICAgSXNQYWlkIC0tICJObyIgLS0+IENvbmZpcm1hdGlvbgogICAgICAgIENvbmZpcm1hdGlvbiAtLT4gRW5kW0VuZDogRW5qb3kgRXZlbnQhXQogICAgICAgIAogICAgICAgIFVDNCAtLT4gVUM1KFVDNTogVmlldyBSZWdpc3RyYXRpb25zKQogICAgICAgIFVDNSAtLT4gRW5kCiAgICBlbmQ="
+      },
+      {
+        "id": "diagram-3",
+        "title": "Secondary Workflow - Organizer Path",
+        "type": "flowchart",
+        "mermaid": "graph TD\n    subgraph \"Organizer Workflow\"\n        OrgStart[Start: Organizer Accesses Portal]\n        OrgStart --> UC4(UC4: Log In)\n        UC4 --> AdminDashboard(FR-7: Admin Dashboard)\n        AdminDashboard --> UC6(UC6: Manage Events)\n        UC6 -- \"Create Event\" --> Create[Create Event (FR-8)]\n        UC6 -- \"Edit Event\" --> Edit[Edit Event (FR-9)]\n        UC6 -- \"Delete Event\" --> Delete[Delete Event (FR-10)]\n        \n        AdminDashboard --> UC7(UC7: View Registration Statistics)\n        AdminDashboard --> UC9(UC9: Export Participant Data)\n        UC7 --> OrgEnd[End: Management Complete]\n        UC9 --> OrgEnd\n    end",
+        "image_url": "https://mermaid.ink/img/Z3JhcGggVEQKICAgIHN1YmdyYXBoICJPcmdhbml6ZXIgV29ya2Zsb3ciCiAgICAgICAgT3JnU3RhcnRbU3RhcnQ6IE9yZ2FuaXplciBBY2Nlc3NlcyBQb3J0YWxdCiAgICAgICAgT3JnU3RhcnQgLS0+IFVDNChVQzQ6IExvZyBJbikKICAgICAgICBVQzQgLS0+IEFkbWluRGFzaGJvYXJkKEZSLTc6IEFkbWluIERhc2hib2FyZCkKICAgICAgICBBZG1pbkRhc2hib2FyZCAtLT4gVUM2KFVDNjogTWFuYWdlIEV2ZW50cykKICAgICAgICBVQzYgLS0gIkNyZWF0ZSBFdmVudCIgLS0+IENyZWF0ZVtDcmVhdGUgRXZlbnQgKEZSLTgpXQogICAgICAgIFVDNiAtLSAiRWRpdCBFdmVudCIgLS0+IEVkaXRbRWRpdCBFdmVudCAoRlItOSldCiAgICAgICAgVUM2IC0tICJEZWxldGUgRXZlbnQiIC0tPiBEZWxldGVbRGVsZXRlIEV2ZW50IChGUi0xMCldCiAgICAgICAgCiAgICAgICAgQWRtaW5EYXNoYm9hcmQgLS0+IFVDNyhVQzc6IFZpZXcgUmVnaXN0cmF0aW9uIFN0YXRpc3RpY3MpCiAgICAgICAgQWRtaW5EYXNoYm9hcmQgLS0+IFVDOShVQzk6IEV4cG9ydCBQYXJ0aWNpcGFudCBEYXRhKQogICAgICAgIFVDNyAtLT4gT3JnRW5kW0VuZDogTWFuYWdlbWVudCBDb21wbGV0ZV0KICAgICAgICBVQzkgLS0+IE9yZ0VuZAogICAgZW5k"
+      },
+      {
+        "id": "diagram-4",
+        "title": "Payment & Integration Flow",
+        "type": "flowchart",
+        "mermaid": "graph TD\n    A1(A1: Student) -- \"Initiates Registration\" --> UC2(UC2: Register for Event)\n    UC2 -- \"Requires Payment\" --> TriggerPayment[Trigger Payment Flow]\n    TriggerPayment --> PaymentGateway(External System: Payment Gateway (FR-13))\n    PaymentGateway -- \"Processes Payment\" --> PaymentSuccess{Payment Successful?}\n    PaymentSuccess -- \"Yes\" --> UC8(UC8: Process Payment)\n    UC8 --> GenerateTicket[Generate PDF Ticket (FR-14)]\n    UC8 --> SendConfirmationEmail[Send Confirmation Email (FR-3)]\n    GenerateTicket & SendConfirmationEmail --> A1\n    \n    PaymentSuccess -- \"No\" --> PaymentFailed[Payment Failed]\n    PaymentFailed --> TriggerPayment",
+        "image_url": "https://mermaid.ink/img/Z3JhcGggVEQKICAgIEExKEExOiBTdHVkZW50KSAtLSAiSW5pdGlhdGVzIFJlZ2lzdHJhdGlvbiIgLS0+IFVDMihVQzI6IFJlZ2lzdGVyIGZvciBFdmVudCkKICAgIFVDMiAtLSAiUmVxdWlyZXMgUGF5bWVudCIgLS0+IFRyaWdnZXJQYXltZW50W1RyaWdnZXIgUGF5bWVudCBGbG93XQogICAgVHJpZ2dlclBheW1lbnQgLS0+IFBheW1lbnRHYXRld2F5KEV4dGVybmFsIFN5c3RlbTogUGF5bWVudCBHYXRld2F5IChGUi0xMykpCiAgICBQYXltZW50R2F0ZXdheSAtLSAiUHJvY2Vzc2VzIFBheW1lbnQiIC0tPiBQYXltZW50U3VjY2Vzc3tQYXltZW50IFN1Y2Nlc3NmdWw/fQogICAgUGF5bWVudFN1Y2Nlc3MgLS0gIlllcyIgLS0+IFVDOChVQzg6IFByb2Nlc3MgUGF5bWVudCkKICAgIFVDOCAtLT4gR2VuZXJhdGVUaWNrZXRbR2VuZXJhdGUgUERGIFRpY2tldCAoRlItMTQpXQogICAgVUM4IC0tPiBTZW5kQ29uZmlybWF0aW9uRW1haWxbU2VuZCBDb25maXJtYXRpb24gRW1haWwgKEZSLTMpXQogICAgR2VuZXJhdGVUaWNrZXQgJiBTZW5kQ29uZmlybWF0aW9uRW1haWwgLS0+IEExCiAgICAKICAgIFBheW1lbnRTdWNjZXNzIC0tICJObyIgLS0+IFBheW1lbnRGYWlsZWRbUGF5bWVudCBGYWlsZWRdCiAgICBQYXltZW50RmFpbGVkIC0tPiBUcmlnZ2VyUGF5bWVudA=="
+      },
+      {
+        "id": "diagram-5",
+        "title": "State Machine - Student Registration States",
+        "type": "state",
+        "mermaid": "stateDiagram-v2\n    [*] --> NotLoggedIn: Access website\n\n    NotLoggedIn --> LoggedIn: UC4: Log In / UC3: Sign Up\n\n    LoggedIn --> ViewingEvents: UC1: View Events\n    ViewingEvents --> EventSelected: Select an Event\n    EventSelected --> RegistrationForm: Fill FR-12 Details\n\n    RegistrationForm --> AwaitingPayment: Submit for Paid Event\n    AwaitingPayment --> PaymentSuccessful: UC8: Process Payment\n    PaymentSuccessful --> Confirmed: FR-3, FR-14 Generated\n\n    RegistrationForm --> Confirmed: Submit for Free Event\n\n    Confirmed --> [*]\n\n    AwaitingPayment --> PaymentFailed: Payment Error\n    PaymentFailed --> RegistrationForm: Retry Payment\n\n    EventSelected --> Cancelled: Student Exits / Cancels\n    RegistrationForm --> Cancelled: Student Cancels\n    Cancelled --> LoggedIn: Return to Dashboard",
+        "image_url": "https://mermaid.ink/img/c3RhdGVEaWFncmFtLXYyCiAgICBbKl0gLS0+IE5vdExvZ2dlZEluOiBBY2Nlc3Mgd2Vic2l0ZQoKICAgIE5vdExvZ2dlZEluIC0tPiBMb2dnZWRJbjogVUM0OiBMb2cgSW4gLyBVQzM6IFNpZ24gVXAKCiAgICBMb2dnZWRJbiAtLT4gVmlld2luZ0V2ZW50czogVUMxOiBWaWV3IEV2ZW50cwogICAgVmlld2luZ0V2ZW50cyAtLT4gRXZlbnRTZWxlY3RlZDogU2VsZWN0IGFuIEV2ZW50CiAgICBFdmVudFNlbGVjdGVkIC0tPiBSZWdpc3RyYXRpb25Gb3JtOiBGaWxsIEZSLTEyIERldGFpbHMKCiAgICBSZWdpc3RyYXRpb25Gb3JtIC0tPiBBd2FpdGluZ1BheW1lbnQ6IFN1Ym1pdCBmb3IgUGFpZCBFdmVudAogICAgQXdhaXRpbmdQYXltZW50IC0tPiBQYXltZW50U3VjY2Vzc2Z1bDogVUM4OiBQcm9jZXNzIFBheW1lbnQKICAgIFBheW1lbnRTdWNjZXNzZnVsIC0tPiBDb25maXJtZWQ6IEZSLTMsIEZSLTE0IEdlbmVyYXRlZAoKICAgIFJlZ2lzdHJhdGlvbkZvcm0gLS0+IENvbmZpcm1lZDogU3VibWl0IGZvciBGcmVlIEV2ZW50CgogICAgQ29uZmlybWVkIC0tPiBbKl0KCiAgICBBd2FpdGluZ1BheW1lbnQgLS0+IFBheW1lbnRGYWlsZWQ6IFBheW1lbnQgRXJyb3IKICAgIFBheW1lbnRGYWlsZWQgLS0+IFJlZ2lzdHJhdGlvbkZvcm06IFJldHJ5IFBheW1lbnQKCiAgICBFdmVudFNlbGVjdGVkIC0tPiBDYW5jZWxsZWQ6IFN0dWRlbnQgRXhpdHMgLyBDYW5jZWxzCiAgICBSZWdpc3RyYXRpb25Gb3JtIC0tPiBDYW5jZWxsZWQ6IFN0dWRlbnQgQ2FuY2VscwogICAgQ2FuY2VsbGVkIC0tPiBMb2dnZWRJbjogUmV0dXJuIHRvIERhc2hib2FyZA=="
+      },
+      {
+        "id": "diagram-6",
+        "title": "Requirements Traceability - FR to UC Mapping",
+        "type": "flowchart",
+        "mermaid": "graph LR\n    subgraph \"Use Cases\"\n        UC1(UC1: View Events)\n        UC2(UC2: Register for Event)\n        UC3(UC3: Sign Up)\n        UC4(UC4: Log In)\n        UC5(UC5: View Registrations)\n        UC6(UC6: Manage Events)\n        UC7(UC7: View Registration Statistics)\n        UC8(UC8: Process Payment)\n        UC9(UC9: Export Participant Data)\n    end\n\n    subgraph \"Functional Requirements\"\n        FR1(FR-1: View upcoming events)\n        FR2(FR-2: Register for events)\n        FR3(FR-3: Send email confirmation)\n        FR4(FR-4: Sign up with college email)\n        FR5(FR-5: Log in)\n        FR6(FR-6: View past/upcoming registrations)\n        FR7(FR-7: Admin dashboard)\n        FR8(FR-8: Create events)\n        FR9(FR-9: Edit events)\n        FR10(FR-10: Delete events)\n        FR11(FR-11: Display registration statistics)\n        FR12(FR-12: Collect registration data)\n        FR13(FR-13: Integrate payment gateway)\n        FR14(FR-14: Generate PDF ticket)\n        FR15(FR-15: Export participant data)\n        FR16(FR-16: Send reminder emails)\n    end\n\n    FR1 --> UC1\n    FR2 --> UC2\n    FR3 --> UC2\n    FR3 --> UC8\n    FR12 --> UC2\n    FR16 --> UC2\n    FR4 --> UC3\n    FR5 --> UC4\n    FR6 --> UC5\n    FR7 --> UC6\n    FR7 --> UC7\n    FR7 --> UC9\n    FR8 --> UC6\n    FR9 --> UC6\n    FR10 --> UC6\n    FR11 --> UC7\n    FR13 --> UC8\n    FR14 --> UC8\n    FR15 --> UC9",
+        "image_url": "https://mermaid.ink/img/Z3JhcGggTFIKICAgIHN1YmdyYXBoICJVc2UgQ2FzZXMiCiAgICAgICAgVUMxKFVDMTogVmlldyBFdmVudHMpCiAgICAgICAgVUMyKFVDMjogUmVnaXN0ZXIgZm9yIEV2ZW50KQogICAgICAgIFVDMyhVQzM6IFNpZ24gVXApCiAgICAgICAgVUM0KFVDNDogTG9nIEluKQogICAgICAgIFVDNShVQzU6IFZpZXcgUmVnaXN0cmF0aW9ucykKICAgICAgICBVQzYoVUM2OiBNYW5hZ2UgRXZlbnRzKQogICAgICAgIFVDNyhVQzc6IFZpZXcgUmVnaXN0cmF0aW9uIFN0YXRpc3RpY3MpCiAgICAgICAgVUM4KFVDODogUHJvY2VzcyBQYXltZW50KQogICAgICAgIFVDOShVQzk6IEV4cG9ydCBQYXJ0aWNpcGFudCBEYXRhKQogICAgZW5kCgogICAgc3ViZ3JhcGggIkZ1bmN0aW9uYWwgUmVxdWlyZW1lbnRzIgogICAgICAgIEZSMShGUi0xOiBWaWV3IHVwY29taW5nIGV2ZW50cykKICAgICAgICBGUjIoRlItMjogUmVnaXN0ZXIgZm9yIGV2ZW50cykKICAgICAgICBGUjMoRlItMzogU2VuZCBlbWFpbCBjb25maXJtYXRpb24pCiAgICAgICAgRlI0KEZSLTQ6IFNpZ24gdXAgd2l0aCBjb2xsZWdlIGVtYWlsKQogICAgICAgIEZSNShGUi01OiBMb2cgaW4pCiAgICAgICAgRlI2KEZSLTY6IFZpZXcgcGFzdC91cGNvbWluZyByZWdpc3RyYXRpb25zKQogICAgICAgIEZSNyhGUi03OiBBZG1pbiBkYXNoYm9hcmQpCiAgICAgICAgRlI4KEZSLTg6IENyZWF0ZSBldmVudHMpCiAgICAgICAgRlI5KEZSLTk6IEVkaXQgZXZlbnRzKQogICAgICAgIEZSMTAoRlItMTA6IERlbGV0ZSBldmVudHMpCiAgICAgICAgRlIxMShGUi0xMTogRGlzcGxheSByZWdpc3RyYXRpb24gc3RhdGlzdGljcykKICAgICAgICBGUjEyKEZSLTEyOiBDb2xsZWN0IHJlZ2lzdHJhdGlvbiBkYXRhKQogICAgICAgIEZSMTMoRlItMTM6IEludGVncmF0ZSBwYXltZW50IGdhdGV3YXkpCiAgICAgICAgRlIxNChGUi0xNDogR2VuZXJhdGUgUERGIHRpY2tldCkKICAgICAgICBGUjE1KEZSLTE1OiBFeHBvcnQgcGFydGljaXBhbnQgZGF0YSkKICAgICAgICBGUjE2KEZSLTE2OiBTZW5kIHJlbWluZGVyIGVtYWlscykKICAgIGVuZAoKICAgIEZSMSAtLT4gVUMxCiAgICBGUjIgLS0+IFVDMgogICAgRlIzIC0tPiBVQzIKICAgIEZSMyAtLT4gVUM4CiAgICBGUjEyIC0tPiBVQzIKICAgIEZSMTYgLS0+IFVDMgogICAgRlI0IC0tPiBVQzMKICAgIEZSNSAtLT4gVUM0CiAgICBGUjYgLS0+IFVDNQogICAgRlI3IC0tPiBVQzYKICAgIEZSNyAtLT4gVUM3CiAgICBGUjcgLS0+IFVDOQogICAgRlI4IC0tPiBVQzYKICAgIEZSOSAtLT4gVUM2CiAgICBGUjEwIC0tPiBVQzYKICAgIEZSMTEgLS0+IFVDNwogICAgRlIxMyAtLT4gVUM4CiAgICBGUjE0IC0tPiBVQzgKICAgIEZSMTUgLS0+IFVDOQ=="
+      }
+    ],
+    "srs_metadata": {
+      "system_name": "College Event Management Website",
+      "actors": [
+        {
+          "id": "A1",
+          "name": "Student",
+          "description": "A college student who wants to view, register for, and manage their event registrations."
+        },
+        {
+          "id": "A2",
+          "name": "Organizer",
+          "description": "A college staff member or event coordinator responsible for creating, managing, and monitoring events."
+        }
+      ],
+      "use_cases": [
+        {
+          "id": "UC1",
+          "name": "View Events",
+          "actors": [
+            "A1"
+          ],
+          "trigger": "Student accesses the website.",
+          "outcome": "Student views a list of upcoming events.",
+          "functional_requirements": [
+            "FR-1"
+          ]
+        },
+        {
+          "id": "UC2",
+          "name": "Register for Event",
+          "actors": [
+            "A1"
+          ],
+          "trigger": "Student selects an event to register.",
+          "outcome": "Student successfully registers for the event and receives a confirmation email.",
+          "functional_requirements": [
+            "FR-2",
+            "FR-3",
+            "FR-12",
+            "FR-16"
+          ]
+        },
+        {
+          "id": "UC3",
+          "name": "Sign Up",
+          "actors": [
+            "A1"
+          ],
+          "trigger": "Student chooses to create a new account.",
+          "outcome": "Student account is created using their college email address.",
+          "functional_requirements": [
+            "FR-4"
+          ]
+        },
+        {
+          "id": "UC4",
+          "name": "Log In",
+          "actors": [
+            "A1",
+            "A2"
+          ],
+          "trigger": "User attempts to access personalized or admin features.",
+          "outcome": "User is authenticated and gains access to their respective dashboard/features.",
+          "functional_requirements": [
+            "FR-5"
+          ]
+        },
+        {
+          "id": "UC5",
+          "name": "View Registrations",
+          "actors": [
+            "A1"
+          ],
+          "trigger": "Logged-in student navigates to their registrations section.",
+          "outcome": "Student views a list of events they have registered for.",
+          "functional_requirements": [
+            "FR-6"
+          ]
+        },
+        {
+          "id": "UC6",
+          "name": "Manage Events",
+          "actors": [
+            "A2"
+          ],
+          "trigger": "Organizer accesses the admin dashboard's event management section.",
+          "outcome": "Organizer successfully creates, edits, or deletes an event.",
+          "functional_requirements": [
+            "FR-7",
+            "FR-8",
+            "FR-9",
+            "FR-10"
+          ]
+        },
+        {
+          "id": "UC7",
+          "name": "View Registration Statistics",
+          "actors": [
+            "A2"
+          ],
+          "trigger": "Organizer accesses the admin dashboard's statistics section.",
+          "outcome": "Organizer views registration analytics and statistics for events.",
+          "functional_requirements": [
+            "FR-7",
+            "FR-11"
+          ]
+        },
+        {
+          "id": "UC8",
+          "name": "Process Payment",
+          "actors": [
+            "A1"
+          ],
+          "trigger": "Student proceeds to pay for a paid event during registration.",
+          "outcome": "Payment is successfully processed, and a downloadable PDF ticket with a QR code is generated.",
+          "functional_requirements": [
+            "FR-13",
+            "FR-14"
+          ]
+        },
+        {
+          "id": "UC9",
+          "name": "Export Participant Data",
+          "actors": [
+            "A2"
+          ],
+          "trigger": "Organizer selects an event and chooses to export participant data.",
+          "outcome": "Organizer downloads participant data in CSV format.",
+          "functional_requirements": [
+            "FR-7",
+            "FR-15"
+          ]
+        }
+      ],
+      "functional_requirements": [
+        {
+          "id": "FR-1",
+          "text": "The system shall allow students to view upcoming events."
+        },
+        {
+          "id": "FR-2",
+          "text": "The system shall allow students to register for events."
+        },
+        {
+          "id": "FR-3",
+          "text": "The system shall send an email confirmation to students after successful registration."
+        },
+        {
+          "id": "FR-4",
+          "text": "The system shall allow students to sign up using their college email address."
+        },
+        {
+          "id": "FR-5",
+          "text": "The system shall allow students and organizers to log in using their credentials."
+        },
+        {
+          "id": "FR-6",
+          "text": "The system shall allow students to view their past and upcoming event registrations."
+        },
+        {
+          "id": "FR-7",
+          "text": "The system shall provide an admin dashboard for organizers."
+        },
+        {
+          "id": "FR-8",
+          "text": "The system shall allow organizers to create events."
+        },
+        {
+          "id": "FR-9",
+          "text": "The system shall allow organizers to edit existing events."
+        },
+        {
+          "id": "FR-10",
+          "text": "The system shall allow organizers to delete events."
+        },
+        {
+          "id": "FR-11",
+          "text": "The system shall display registration statistics to organizers."
+        },
+        {
+          "id": "FR-12",
+          "text": "The system shall collect Name, Email, Department, Year of Study, and Phone Number during student registration."
+        },
+        {
+          "id": "FR-13",
+          "text": "The system shall integrate with a payment gateway (e.g., Razorpay) for paid events."
+        },
+        {
+          "id": "FR-14",
+          "text": "The system shall generate a downloadable PDF ticket with a QR code for students after payment."
+        },
+        {
+          "id": "FR-15",
+          "text": "The system shall allow organizers to export participant data in CSV format."
+        },
+        {
+          "id": "FR-16",
+          "text": "The system shall send reminder emails to students 24 hours before an event."
+        }
+      ]
+    },
+    "diagram_count": 6
+  }
+}
